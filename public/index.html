@@ -3,14 +3,18 @@
   <head>
     <meta charset="utf-8">
     <title> Weekend 4 Live Solve</title>
-    <script src="vendors/jquery.min.js" charset="utf-8"></script>
-    <script src="scripts/script.js" charset="utf-8"></script>
+    <script src="vendors/angular.min.js" charset="utf-8"></script>
+    <script src="scripts/client.js" charset="utf-8"></script>
     <link rel="stylesheet" href="styles/style.css">
   </head>
-  <body>
-    <label for="task"></label>
-    <input id="task" type="text" name="task">
-    <button id="createTask" type="button" name="button">Add Task</button>
-    <div id="taskDiv"></div>
+  <body ng-app="TaskApp" ng-controller="TaskController as tc">
+    {{tc.someThing}}
+    <label</label>
+    <input>
+    <button>Add Task</button>
+    <div ng-repeat="task in tc.taskList">
+      {{task}}
+    </div>
+
   </body>
 </html>
