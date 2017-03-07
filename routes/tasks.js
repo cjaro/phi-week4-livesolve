@@ -50,7 +50,7 @@ router.post('/', function(req, res) {
       res.sendStatus(500);
     }else{
       client.query('INSERT INTO task (name) VALUES ($1);',
-        [taskObject.taskName], function(err, result) {
+        [taskObject.name], function(err, result) {
           done();
           if(err){
             console.log(err);
