@@ -13,7 +13,9 @@
     <input ng-model="tc.newTask.name">
     <button ng-click="tc.addTask()">Add Task</button>
     <div ng-repeat="task in tc.taskList">
-      {{task.name}}
+      {{task.name}} and the id number is {{task.id}}
+      <button ng-click="tc.completeTask(task.id)">complete</button>
+      <button ng-click="tc.deleteTask(task.id)">delete</button>
     </div>
 
   </body>

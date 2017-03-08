@@ -20,7 +20,7 @@ router.get('/', function(req, res) {
       res.sendStatus(500);
     }else{
       // SELECT * FROM task;
-      client.query('SELECT * FROM task;', function(err, result) {
+      client.query('SELECT * FROM task OREDR BY id;', function(err, result) {
         done(); // close the connection db
 
         if(err){
@@ -57,6 +57,54 @@ router.post('/', function(req, res) {
             res.sendStatus(500); // the world exploded
           }else{
             res.sendStatus(201);
+          }
+      });
+    }
+  });
+});
+
+router.delete('/:id', function(req, res) { // : makes this a parameter
+  var taskToDeleteId = req.params.id; //body is data (req.body), params is built out from url
+  console.log('hit delete route');
+  console.log('here is the id to complete ->', taskToDeleteId);
+
+  pool.connect(function(err, client, done) {
+    if(err){
+      console.log(err);
+      res.sendStatus(500);
+    }else{
+      client.query('DELETE FROM task WHERE id=$1;',
+        [taskToDeleteId], function(err, result) {
+          done();
+          if(err){
+            console.log(err);
+            res.sendStatus(500);
+          }else{
+            res.sendStatus(200);
+          }
+      });
+    }
+  });
+});
+
+router.put('/:id', function(req, res) { // : makes this a parameter
+  var taskToCompleteId = req.params.id; //body is data (req.body), params is built out from url
+  console.log('hit complete route');
+  console.log('here is the id to complete ->', taskToCompleteId);
+
+  pool.connect(function(err, client, done) {
+    if(err){
+      console.log(err);
+      res.sendStatus(500);
+    }else{
+      client.query('UPDATE task SET status = TRUE WHERE id = $1;',
+        [taskToCompleteId], function(err, result) {
+          done();
+          if(err){
+            console.log(err);
+            res.sendStatus(500);
+          }else{
+            res.sendStatus(200);
           }
       });
     }

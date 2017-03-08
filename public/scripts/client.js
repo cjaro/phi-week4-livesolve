@@ -18,7 +18,7 @@ myApp.controller('TaskController', ['$http', function($http){
     });
   }
 
-self.addTask = function addTask(){
+  self.addTask = function addTask(){
     $http({
       method: 'POST',
       url: '/tasks',
@@ -28,5 +28,24 @@ self.addTask = function addTask(){
       getTasks();
     });
   }
+
+  self.deleteTask = function(){
+    $http({
+      method: 'DELETE',
+      url: '/tasks' + taskId
+    }).then(function(response){
+      getTasks();
+    })
+  }
+
+  self.completeTask = function(){
+    $http({
+      method: 'PUT',
+      url: '/tasks' + taskId
+    }).then(function(response){
+      getTasks();
+    })
+  }
+
 
 }]);
